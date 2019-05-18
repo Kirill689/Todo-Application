@@ -2,7 +2,7 @@ import React from "react";
 
 import './TodoListStyle.css';
 
-import TodoListItem from './TodoListItem';
+import TodoListItem from '../todoListItem';
 
 const TodoList = ({todos})=>{
 
