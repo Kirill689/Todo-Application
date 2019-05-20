@@ -4,7 +4,7 @@ import './TodoListStyle.css';
 
 import TodoListItem from '../todoListItem';
 
-const TodoList = ({todos})=>{
+const TodoList = ({todos, onDelete})=>{
 
     const todoElement = todos.map((item)=> {
 
@@ -12,7 +12,9 @@ const TodoList = ({todos})=>{
 
         return(
             <li key={id} className="list-group-item">
-                <TodoListItem{...itemProps}/>
+                <TodoListItem{...itemProps}
+                onDelete={()=> onDelete(id)}
+                />
             </li>
         );
     });

@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 
 import AppHeader from '../appHeader';
 import SearchPanel from '../searchPanel';
@@ -7,16 +6,24 @@ import TodoList from '../todoList';
 import ItemStatusFilter from '../itemStatusFilter';
 
 
-const App = ()=> {
+export default class App extends React.Component {
 
-    const todoData = [
-        {label: 'Drink coffee', important: false, id: 1},
-        {label: 'Learn React ', important: true,  id: 2},
-        {label: 'Make changes on project', important: true,  id: 3},
-        {label: 'Commit it', important: true,  id: 4}
-    ]
+  state = {
+    todoData:[
+      {label: 'Drink coffee', important: false, id: 1},
+      {label: 'Learn React ', important: true,  id: 2},
+      {label: 'Make changes on project', important: true,  id: 3},
+      {label: 'Commit it', important: true,  id: 4}
+  ]};
 
-    return (
+
+  deleteItem = (id)=>{
+     
+  };
+
+    render(){
+
+      return (
         <div className="todo-app">
           <AppHeader toDo={1} done={3} />
           <div className="top-panel d-flex">
@@ -24,9 +31,11 @@ const App = ()=> {
             <ItemStatusFilter/>
           </div>
     
-          <TodoList todos={todoData} />
+          <TodoList todos={this.state.todoData}
+          onDelete={this.deleteItem} />
         </div>
       );
-}
+    };
+    
+};
 
-export default App;
