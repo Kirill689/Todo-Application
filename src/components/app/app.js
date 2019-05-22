@@ -18,7 +18,19 @@ export default class App extends React.Component {
 
 
   deleteItem = (id)=>{
-     
+     this.setState (({todoData}) => {
+       const index = todoData.findIndex((el)=> el.id === id);
+      
+       const beforeIndex = todoData.slice(0, index);
+       const afterIndex = todoData.slice(index + 1);
+       
+       const newTododata = [...beforeIndex, ...afterIndex];
+
+       return {
+         todoData: newTododata
+       }
+       
+     });
   };
 
     render(){
