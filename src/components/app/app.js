@@ -9,7 +9,7 @@ import ItemAddForm from '../itemAddForm';
 
 export default class App extends React.Component {
 
-  maxId = 100;
+  maxId = 1000;
 
   state = {
     todoData:[
