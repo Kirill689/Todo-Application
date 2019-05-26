@@ -4,36 +4,10 @@ import './TodoListItemStyle.css';
 
 export default class TodoListItem extends React.Component {
   
-  constructor() {
-    super();
-
-    this.state = {
-      done: false,
-      important: false
-    }
-
-    this.onLabelClick = ()=>{
-       this.setState((state)=>{
-        return{
-          done: !state.done
-        }
-       });
-    }
-
-    this.onMarkImportant = ()=>{
-      this.setState((state)=>{
-       return{
-         important: !state.important
-       }
-      });
-    }
-
-  }
 
   render(){
 
-    const { label, onDelete } = this.props
-    const {done, important} = this.state;
+    const { label, onDelete, onToggleImportant, onToggleDone, important, done} = this.props
 
     let classNames = 'todo-list-item';
     if(done){
@@ -49,13 +23,13 @@ export default class TodoListItem extends React.Component {
       <span className={classNames}>
         <span
           className="todo-list-item-label"
-          onClick={this.onLabelClick}>
+          onClick={onToggleDone}>
           {label}
         </span>
   
         <button type="button"
                 className="btn btn-outline-success btn-sm float-right"
-                onClick={this.onMarkImportant}>
+                onClick={onToggleImportant}>
           <i className="fa fa-exclamation" />
         </button>
   

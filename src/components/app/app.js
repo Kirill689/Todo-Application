@@ -57,6 +57,18 @@ export default class App extends React.Component {
 
   }
 
+
+  onToggleImportant = (id)=>{
+    console.log(id);
+  }
+
+
+  onToggleDone = (id)=>{
+    console.log(id);
+  }
+
+
+
     render(){
 
       return (
@@ -67,8 +79,12 @@ export default class App extends React.Component {
             <ItemStatusFilter/>
           </div>
     
-          <TodoList todos={this.state.todoData}
-          onDelete={this.deleteItem} />
+          <TodoList
+          todos={this.state.todoData}
+          onDelete={this.deleteItem} 
+          onToggleImportant={this.onToggleImportant}
+          onToggleDone={this.onToggleDone}
+          />
           <ItemAddForm
           onAdd={this.addItem}
           />
