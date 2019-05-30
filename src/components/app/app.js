@@ -9,25 +9,37 @@ import ItemAddForm from '../itemAddForm';
 
 export default class App extends React.Component {
 
+
   maxId = 1000;
+
+
 
   state = {
     todoData:[
-      {label: 'Drink coffee', important: false, id: 1},
-      {label: 'Learn React ', important: true,  id: 2},
-      {label: 'Make changes on project', important: true,  id: 3},
-      {label: 'Commit it', important: true,  id: 4}
+     this.createTodoItem('Make new commit'),
+     this.createTodoItem('Worckout'),
+     this.createTodoItem('Dinner'),
+     this.createTodoItem('Sleep')
   ]};
+
+
+
+  createTodoItem (label){
+    return {
+      label,
+      important: false,
+      done: false,
+      id: this.maxId++
+    }
+  };
+
 
 
   deleteItem = (id)=>{
      this.setState (({todoData}) => {
        const index = todoData.findIndex((el)=> el.id === id);
-      
-       const beforeIndex = todoData.slice(0, index);
-       const afterIndex = todoData.slice(index + 1);
        
-       const newTododata = [...beforeIndex, ...afterIndex];
+       const newTododata = [...todoData.slice(0, index), ...todoData.slice(index + 1)];
 
        return {
          todoData: newTododata
@@ -36,44 +48,68 @@ export default class App extends React.Component {
      });
   };
 
+ 
 
   addItem = (text)=> {
     
-    const newItem = {
-      label: text,
-      important: false,
-      id: this.maxId++
-    }
+    const newItem = this.createTodoItem(text);
 
     this.setState (({todoData}) => {
-     
+
       const newTododata = [...todoData, newItem];
 
-      return {
-        todoData: newTododata
-      }
+      return {todoData: newTododata}
       
     });
 
-  }
+  };
 
+
+  toggleFunc (data, id, toggleProp){
+
+      const i = data.findIndex((el)=>el.id === id)
+  
+      const oldItem = data[i];
+      const newItem = {...oldItem, [toggleProp]: !oldItem[toggleProp]};
+     
+      return [...data.slice(0, i), newItem, ...data.slice(i + 1)];
+
+  };
 
   onToggleImportant = (id)=>{
-    console.log(id);
-  }
+
+   this.setState(({todoData})=>{
+        return {
+          todoData: this.toggleFunc(todoData, id, "important")
+        };
+   });
+
+  };
+
 
 
   onToggleDone = (id)=>{
-    console.log(id);
-  }
+   
+    this.setState(({todoData})=>{
+      
+      return {
+        todoData: this.toggleFunc(todoData, id, "done")
+      }
+  
+      });
+
+  };
 
 
 
-    render(){
+  render(){
+
+    const doneItems = this.state.todoData.filter((el)=> el.done).length;
+    const notDoneItems = this.state.todoData.length - doneItems;
 
       return (
         <div className="todo-app">
-          <AppHeader toDo={1} done={3} />
+          <AppHeader toDo={notDoneItems} done={doneItems} />
           <div className="top-panel d-flex">
             <SearchPanel />
             <ItemStatusFilter/>
@@ -90,7 +126,7 @@ export default class App extends React.Component {
           />
         </div>
       );
-    };
+  };
     
 };
 
