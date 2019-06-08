@@ -1,0 +1,11 @@
+.ItemAddForm {
+    margin-top: 10px;
+}
+
+.form-control {
+    margin-right: 4px;
+}
+
+.ItemAddForm button {
+    width: 125px;
+}

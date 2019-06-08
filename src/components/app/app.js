@@ -6,6 +6,7 @@ import TodoList from '../todoList';
 import ItemStatusFilter from '../itemStatusFilter';
 import ItemAddForm from '../itemAddForm';
 
+import './appStyle.css';
 
 export default class App extends React.Component {
 
@@ -110,7 +111,7 @@ export default class App extends React.Component {
       return (
         <div className="todo-app">
           <AppHeader toDo={notDoneItems} done={doneItems} />
-          <div className="top-panel d-flex">
+          <div className="search-panel d-flex">
             <SearchPanel />
             <ItemStatusFilter/>
           </div>
